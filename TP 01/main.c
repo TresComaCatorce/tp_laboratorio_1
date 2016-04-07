@@ -3,10 +3,6 @@
 #include <string.h>
 #include <windows.h>
 
-/***--CORREGIR PARA LA ENTREGA--***///#include "calculos.h"
-/***--CORREGIR PARA LA ENTREGA--***///#include "../../../Bibliotecas/Utiles/Utiles.h"
-/***--CORREGIR PARA LA ENTREGA--***///#include "../../../Bibliotecas/Operaciones/Operaciones.h"
-//#include "../Bibliotecas/Utiles/Utiles.h"
 #include "../Bibliotecas/Operaciones/Operaciones.h"
 #include "../Bibliotecas/Utiles/Utiles.h"
 
@@ -49,8 +45,15 @@ int main()
                 break;
 
             case 5:
-                resultado=cociente(numeroA, numeroB);
-                printf("\nEl resultado del cociente A/B es: %.2f \n\n", resultado);
+                if(numeroB != 0)
+                {
+                    resultado=cociente(numeroA, numeroB);
+                    printf("\nEl resultado del cociente A/B es: %.2f \n\n", resultado);
+                }
+                else
+                {
+                    printf("\nERROR! El operando 'B' no puede ser igual a 0. \n\n")
+                }
                 system("pause");
                 system("cls");
                 break;
