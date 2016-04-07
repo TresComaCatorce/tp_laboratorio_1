@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1459878978 source:/media/Cristian/9834F6D434F6B3FA/UTN/Programacion I/TP 01/Calculadora/TP 1 - Calculadora/calculos.c
+
+1459882549 source:/media/Cristian/9834F6D434F6B3FA/UTN/Programacion I/TP 01/Calculadora/TP 1 - Calculadora/main.c
+	<stdio.h>
+	<stdlib.h>
+	"../../../Bibliotecas/Utiles/Utiles.h"
+	"../../../Bibliotecas/Operaciones/Operaciones.h"
+
+1459882436 /media/Cristian/9834F6D434F6B3FA/UTN/Programacion I/Bibliotecas/Utiles/Utiles.h
+
+1459381411 /media/Cristian/9834F6D434F6B3FA/UTN/Programacion I/Bibliotecas/Operaciones/Operaciones.h
+
+1459913666 source:f:\workspacec\calculadora\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+	"../Bibliotecas/Operaciones/Operaciones.h"
+	"../Bibliotecas/Utiles/Utiles.h"
+
+1459909900 f:\workspacec\bibliotecas\operaciones\operaciones.h
+
+1459911088 source:f:\workspacec\bibliotecas\operaciones\operaciones.c
+
+1459913800 source:f:\workspacec\bibliotecas\utiles\utiles.c
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+
+1459913304 f:\workspacec\bibliotecas\utiles\utiles.h
+
