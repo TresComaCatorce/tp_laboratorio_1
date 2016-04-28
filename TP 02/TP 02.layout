@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<FileVersion major="1" minor="0" />
+	<ActiveTarget name="Debug" />
+	<File name="..\Bibliotecas\UtilesV2\UtilesV2.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1242" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="696" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="libPersonas.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="451" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="personManager.c" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5363" topLine="97" />
+		</Cursor>
+		<Folding>
+			<Collapse line="17" />
+			<Collapse line="64" />
+			<Collapse line="86" />
+			<Collapse line="213" />
+			<Collapse line="280" />
+			<Collapse line="317" />
+			<Collapse line="340" />
+			<Collapse line="428" />
+		</Folding>
+	</File>
+	<File name="libPersonas.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="237" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="personManager.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="194" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\Bibliotecas\UtilesV2\UtilesV2.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="17499" topLine="46" />
+		</Cursor>
+		<Folding>
+			<Collapse line="15" />
+			<Collapse line="56" />
+			<Collapse line="78" />
+			<Collapse line="141" />
+			<Collapse line="287" />
+			<Collapse line="357" />
+			<Collapse line="417" />
+			<Collapse line="453" />
+			<Collapse line="503" />
+			<Collapse line="569" />
+		</Folding>
+	</File>
+</CodeBlocks_layout_file>
