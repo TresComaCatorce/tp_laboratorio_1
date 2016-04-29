@@ -89,7 +89,7 @@
 	<stdio.h>
 	<ctype.h>
 
-1461859539 source:c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 02\libpersonas.c
+1461936492 source:c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 02\libpersonas.c
 	"../Bibliotecas/UtilesV2/UtilesV2.h"
 	"personManager.h"
 	<stdio.h>
@@ -97,7 +97,7 @@
 
 1461857827 c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\bibliotecas\utiles\utiles.h
 
-1461862330 c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 02\personmanager.h
+1461948805 c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 02\personmanager.h
 	"libPersonas.h"
 
 1461858283 c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 02\libpersonas.h
@@ -122,10 +122,11 @@
 	<ctype.h>
 	<string.h>
 
-1461870191 source:c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 02\personmanager.c
+1461945189 source:c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 02\personmanager.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<windows.h>
 	"personManager.h"
 	"../Bibliotecas/UtilesV2/UtilesV2.h"
 

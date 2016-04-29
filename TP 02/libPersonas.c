@@ -13,10 +13,11 @@
  */
 short int runSystem(void)
 {
+    short int returnValue = 0;
     sPerson sPersons[QUANTITY];
     initPersonArray(sPersons, QUANTITY);
 
-    initToTest(sPersons, QUANTITY);
+    //initToTest(sPersons, QUANTITY);
 
     int answer;//Answer obtained from the user.
 
@@ -56,7 +57,7 @@ short int runSystem(void)
                 break;
 
             case -1:
-                return 1;
+                returnValue = 1;
                 break;
 
             default:
@@ -65,9 +66,9 @@ short int runSystem(void)
                 break;
         }
 
-    }while( answer != 5 );
+    }while( answer != 5 && answer != -1 );
 
-    return 0;
+    return returnValue;
 }
 
 

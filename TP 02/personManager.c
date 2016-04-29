@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 #include "personManager.h"
 #include "../Bibliotecas/UtilesV2/UtilesV2.h"
 
 #define INPUT_ATTEMPTS 3
-#define SLEEP_TIME
+#define SLEEP_TIME 1400
 
 /** \brief Function used to init 'sPersons' array with fake data. Only to test.
  *
@@ -102,7 +103,7 @@ short int addPerson(sPerson* sPersons, int length)
     }
     else
     {
-        error = requestPersonToUser(&auxPerson, index);
+        error = requestPersonToUser(sPersons, length, &auxPerson, index);
         if( error == -1)
         {
             return -1;
@@ -124,7 +125,7 @@ short int addPerson(sPerson* sPersons, int length)
  * \return (short int) [0]=Succesfull. / [-1]=Failed.
  *
  */
-short int requestPersonToUser(sPerson* auxPerson, int index)
+short int requestPersonToUser(sPerson* sPersons, int length, sPerson* auxPerson, int index)
 {
     int returnValue = -1;
     short int answer = -1;
@@ -151,13 +152,11 @@ short int requestPersonToUser(sPerson* auxPerson, int index)
 
             if( error == 0 )
             {
-                system("cls");
-                error = getStringConIntentos(dni, 10, "Carga de persona\nIngrese N""\xA7"" DNI: ", "Error! El DNI debe tener 9 caracteres como m""\xA0""ximo.", INPUT_ATTEMPTS);
+                system("cls"); //Request the 'dni' number.
+                error = askForDNI( sPersons, length, dni, INPUT_ATTEMPTS );
 
                 if( error == 0 )
                 {
-                    /*** VALIDAR Q EL DNI SEA NUMERICO ***/
-
                     int contadorRtas = 0;
                     do
                     {
@@ -168,11 +167,10 @@ short int requestPersonToUser(sPerson* auxPerson, int index)
                                "Edad: \t\t%d \n"
                                "N""\xA7"" DNI: \t%s \n\n", name, lastName, age, dni);
 
-                        answer = preguntarPorSiOPorNo("Desea confirmar la carga? (S/N) ", "Respuesta inválida.", 1);
+                        answer = preguntarPorSiOPorNo("Desea confirmar la carga? (S/N) ", "Respuesta inv""\xA0""lida.", 1);
                         if( answer == 0 || answer == 1)
                         {
                             system("cls");
-                            system("pause");
                             contadorRtas = (INPUT_ATTEMPTS+1);
                         }
                         contadorRtas++;
@@ -213,14 +211,41 @@ short int requestPersonToUser(sPerson* auxPerson, int index)
 void printListSortedByName(sPerson* sPersons, int length)
 {
     int i;
-    sortPersonArrayByName(sPersons, length);
-    system("cls");
-    printf("Apellido y nombre\tEdad\tN""\xA7"" DNI\n\n");
-    for( i=0 ; i<length ; i++ )
+
+    if( sPersons != NULL && length > 0)
     {
-        if( sPersons[i].state == 1 )
+        int flagHasAEnabledPerson = 0;
+
+        //Check if has a enabled people in array.
+        for( i=0 ; i<length ; i++ )
         {
-            printf("%s, %s\t\t%d\t%s\n", sPersons[i].lastname, sPersons[i].name, sPersons[i].age, sPersons[i].dni);
+            if( sPersons[i].state == 1 )
+            {
+                flagHasAEnabledPerson = 1;
+                break;
+            }
+        }
+
+        system("cls");
+
+        //If has a enabled person, print the list.
+        if( flagHasAEnabledPerson == 1 )
+        {
+            sortPersonArrayByName(sPersons, length);
+            printf("Apellido y nombre\tEdad\tN""\xA7"" DNI\n\n");
+
+            for( i=0 ; i<length ; i++ )
+            {
+                if( sPersons[i].state == 1 )
+                {
+                    printf("%s, %s\t\t%d\t%s\n", sPersons[i].lastname, sPersons[i].name, sPersons[i].age, sPersons[i].dni);
+                }
+            }
+        }
+        //If not has a enabled person...
+        else
+        {
+            printf("No hay personas cargadas en el sistema.\n");
         }
     }
     printf("\n");
@@ -270,11 +295,10 @@ short int sortPersonArrayByName(sPerson* sPersons, int length)
 }
 
 
-/** \brief
+/** \brief Delete a person from 'sPerson' array. Change the 'state' to [0].
  *
- * \param
- * \param
- * \return
+ * \params Persons (sPerson*) Array of 'sPerson'.
+ * \param length (int) Length of 'sPersons'.
  *
  */
 void deletePerson(sPerson* sPersons, int length)
@@ -332,9 +356,8 @@ int searchPersonByDni(sPerson* sPersons, int length, char dniToSearch[])
 
 /** \brief Print a 2D graphic with ranges of ages.
  *
- * \param
- * \param
- * \return
+ * \param sPersons (sPerson[]) Array used to generate the graphic.
+ * \param length (int) Length of 'sPersons'.
  *
  */
 void printAgesGraph(sPerson sPersons[], int length)
@@ -345,84 +368,90 @@ void printAgesGraph(sPerson sPersons[], int length)
     int countMajor35 = 0;
     int countTotal = 0;
 
-    //Counter of ranges and total
-    for( i=0 ; i<length ; i++ )
+    if( sPersons != NULL && length >0 )
     {
-        if( sPersons[i].state == 1 )
-        {
-            countTotal++;
 
-            if( sPersons[i].age <= 18 )
+        //Counter of ranges and total
+        for( i=0 ; i<length ; i++ )
+        {
+            if( sPersons[i].state == 1 )
             {
-                countMinor18++;
+                countTotal++;
+
+                if( sPersons[i].age <= 18 )
+                {
+                    countMinor18++;
+                }
+                if( sPersons[i].age > 18 && sPersons[i].age <= 35)
+                {
+                    count19to35++;
+                }
+                if( sPersons[i].age > 35 )
+                {
+                    countMajor35++;
+                }
             }
-            if( sPersons[i].age > 18 && sPersons[i].age <= 35)
-            {
-                count19to35++;
-            }
-            if( sPersons[i].age > 35 )
-            {
-                countMajor35++;
-            }
         }
-    }
 
-    //Create a matriz to print.
-    char graph[3][countTotal];
+        system("cls");
 
-    //Init matriz in a empty char.
-    for( i=0 ; i<3 ; i++ )
-    {
-        for( j=0 ; j<countTotal ; j++ )
+        //If array is not empty.
+        if( countTotal > 0 )
         {
-            graph[i][j] = '\xF0';
-        }
-    }
+            //Create a matriz to print.
+            char graph[3][countTotal];
 
-    for( j=0 ; j<countTotal ; j++ )
-    {
-        if( countMinor18 > j )
-        {
-            graph[0][j] = '*';
-        }
-        if( count19to35 > j)
-        {
-            graph[1][j] = '*';
-        }
-        if( countMajor35 > j)
-        {
-            graph[2][j] = '*';
-        }
-    }
-
-    system("cls");
-    if( countTotal > 0 )
-    {
-        printf("Menor de 18\tEntre 19 y 35\tMayor de 35\n");
-        for( j=0 ; j<countTotal ; j++ )
-        {
+            //Init matriz in a empty char.
             for( i=0 ; i<3 ; i++ )
             {
-                printf("%c\t\t", graph[i][j]);
+                for( j=0 ; j<countTotal ; j++ )
+                {
+                    graph[i][j] = '\x20';
+                }
             }
-            printf("\n");
-        }
-        printf("\n\n");
-    }
-    else
-    {
-        printf("No hay personas cargadas en el sistema.\n\n");
-    }
 
-    system("pause");
+            for( j=0 ; j<countTotal ; j++ )
+            {
+                if( countMinor18 > j )
+                {
+                    graph[0][j] = '*';
+                }
+                if( count19to35 > j)
+                {
+                    graph[1][j] = '*';
+                }
+                if( countMajor35 > j)
+                {
+                    graph[2][j] = '*';
+                }
+            }
+
+            printf("Menor de 18\tEntre 19 y 35\tMayor de 35\n");
+            for( j=0 ; j<countTotal ; j++ )
+            {
+                for( i=0 ; i<3 ; i++ )
+                {
+                    printf("%c\t\t", graph[i][j]);
+                }
+                printf("\n");
+            }
+            printf("\n\n");
+
+
+        }
+        else
+        {
+            printf("No hay personas cargadas en el sistema.\n\n");
+        }
+
+        system("pause");
+    }
 }
 
 
-/** \brief
+/** \brief Used to exit from the system.
  *
- * \param
- * \param
- * \return
+ * \param answer (int*) Answer to assign a value.
  *
  */
 void exitPersons(int* answer)
@@ -439,4 +468,56 @@ void exitPersons(int* answer)
     {
         *answer = 1;
     }
+}
+
+
+/** \brief Request to user, a 'dni' number and validate if that 'dni' number was entered.
+ *
+ * \param sPersons (sPerson[]) Array searched.
+ * \param length (int) Length of 'sPersons'.
+ * \param dni (int*) Pointer where assign the value, if was correct.
+ * \param attempts (int) Quantity of attempts.
+ * \return (short int) [0]=Succes entry / [-1]=Fail.
+ *
+ */
+short int askForDNI(sPerson* sPersons, int length, char* dni, int attempts)
+{
+    short int returnValue = -1;
+    int countAttempts = 0;
+    short int error;
+    int indexOfPerson;
+    char auxDni[10];
+
+    do
+    {
+        system("cls");
+        error = getStringConIntentos(auxDni, 10, "Carga de persona\nIngrese N""\xA7"" DNI: ", "Error! El DNI debe tener 9 caracteres como m""\xA0""ximo.", INPUT_ATTEMPTS);
+
+        if( error == 0 )
+        {
+            //If has a person with that DNI number in array.
+            indexOfPerson = searchPersonByDni(sPersons, length, auxDni);
+            if( indexOfPerson == -1 )
+            {
+                strcpy( dni , auxDni );
+                returnValue = 0;
+                break;
+            }
+            else if( indexOfPerson >= 0 )
+            {
+                system("cls");
+                printf("Ya existe una persona con ese N""\xA7"" de DNI.\n");
+                Sleep(SLEEP_TIME);
+            }
+        }
+        else if( error == -1 )
+        {
+            break;
+        }
+
+        countAttempts++;
+
+    }while( countAttempts < attempts );
+
+    return returnValue;
 }
