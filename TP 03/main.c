@@ -3,6 +3,7 @@
 
 int main()
 {
+    int error;
     int opcion;
     int size = 10;
     //sMovie *peliculas=(sMovie*)malloc( sizeof(sMovie) * size );
@@ -10,14 +11,22 @@ int main()
 
     //initMovies(peliculas, size);
 
-    if( cargarDesdeArchivo(peliculas) )
-	{
-		printf("No se pudo abrir el fichero");
-	}
-	else
-	{
-		printf("Se cargaron las estructuras con exito\n\n");
-	}
+    error = cargarDesdeArchivo( peliculas, LENGTH );
+
+    switch( error )
+    {
+        case 0:
+            printf("\nSe cargaron las estructuras exitosamente.\n\n");
+            break;
+        case -1:
+            printf("\nNo se pudo abrir el fichero.\n\n");
+            break;
+        case -2:
+            initMovies( peliculas, LENGTH );
+            chargeWithFakeData( peliculas, LENGTH );
+            printf("\nNo existe el archivo de datos, se cre""\xA2"" exitosamente.\n\n");
+            break;
+    }
 
     system("pause");
 
@@ -45,7 +54,7 @@ int main()
                 generarPagina( peliculas, LENGTH );
                 break;
             case 5:
-                doExit(peliculas);
+                doExit( peliculas, LENGTH );
                 break;
             case 6:
                 imprimirListaPeliculas( peliculas, size );

@@ -77,3 +77,34 @@
 	<ctype.h>
 	<string.h>
 
+1461869387 source:c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\bibliotecas\utilesv2\utilesv2.c
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+	<windows.h>
+	"UtilesV2.h"
+
+1461868677 c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\bibliotecas\utilesv2\utilesv2.h
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+
+1464363930 source:c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 03\main.c
+	"libTp3.h"
+
+1464363759 c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 03\libtp3.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<conio.h>
+	<windows.h>
+	"estructuras.h"
+	"../Bibliotecas/UtilesV2/UtilesV2.h"
+
+1464360011 c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 03\estructuras.h
+
+1464363756 source:c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 03\libtp3.c
+	"libTp3.h"
+
