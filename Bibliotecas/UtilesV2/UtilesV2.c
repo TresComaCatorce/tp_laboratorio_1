@@ -414,7 +414,7 @@ short int verificarMaxYMinFloat(float* numero, short int* tieneMinimo, short int
  * \return [0]=Se obtubo exitosamente el string / [-1]=Error al obtener el string.
  *
  */
-short int getString(char miCadena[], int largoMiCadena, char mensaje[], char msjError[])
+short int getString(char *miCadena, int largoMiCadena, char *mensaje, char *msjError)
 {
     char buffer[601];
     int largoAux;
