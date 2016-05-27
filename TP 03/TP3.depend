@@ -1,0 +1,79 @@
+# depslib dependency file v1.0
+1464199765 source:f:\workspaces\workspacec\clases\programacion_laboratorio_ejercicios_clases\bibliotecas\utiles\utiles.c
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+	<windows.h>
+	"Utiles.h"
+
+1464199765 f:\workspaces\workspacec\clases\programacion_laboratorio_ejercicios_clases\bibliotecas\utiles\utiles.h
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+
+1464203245 source:f:\workspaces\workspacec\clases\programacion_laboratorio_ejercicios_clases\tp 03\libtp3.c
+	"libTp3.h"
+
+1464203619 f:\workspaces\workspacec\clases\programacion_laboratorio_ejercicios_clases\tp 03\libtp3.h
+	<stdlib.h>
+	<stdio.h>
+	<windows.h>
+	"estructuras.h"
+	"../Bibliotecas/Utiles/Utiles.h"
+
+1464203127 f:\workspaces\workspacec\clases\programacion_laboratorio_ejercicios_clases\tp 03\estructuras.h
+
+1464202937 source:f:\workspaces\workspacec\clases\programacion_laboratorio_ejercicios_clases\tp 03\main.c
+	<stdio.h>
+	<stdlib.h>
+	"estructuras.h"
+	"libTp3.h"
+	"../Bibliotecas/Utiles/Utiles.h"
+
+1464206288 source:c:\users\dami\desktop\tps\programacion_laboratorio_ejercicios_clases\bibliotecas\utiles\utiles.c
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+	<windows.h>
+	"Utiles.h"
+
+1464206288 c:\users\dami\desktop\tps\programacion_laboratorio_ejercicios_clases\bibliotecas\utiles\utiles.h
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+
+1464226930 source:c:\users\dami\desktop\tps\programacion_laboratorio_ejercicios_clases\tp 03\libtp3.c
+	"libTp3.h"
+
+1464226655 c:\users\dami\desktop\tps\programacion_laboratorio_ejercicios_clases\tp 03\libtp3.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<conio.h>
+	<windows.h>
+	"estructuras.h"
+	"../Bibliotecas/UtilesV2/UtilesV2.h"
+
+1464206336 c:\users\dami\desktop\tps\programacion_laboratorio_ejercicios_clases\tp 03\estructuras.h
+
+1464221007 source:c:\users\dami\desktop\tps\programacion_laboratorio_ejercicios_clases\tp 03\main.c
+	"libTp3.h"
+
+1464212717 source:c:\users\dami\desktop\tps\programacion_laboratorio_ejercicios_clases\bibliotecas\utilesv2\utilesv2.c
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+	<windows.h>
+	"UtilesV2.h"
+
+1464212717 c:\users\dami\desktop\tps\programacion_laboratorio_ejercicios_clases\bibliotecas\utilesv2\utilesv2.h
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+
