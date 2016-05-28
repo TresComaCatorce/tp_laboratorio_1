@@ -5,11 +5,10 @@ int main()
 {
     int error;
     int opcion;
-    int size = 10;
-    //sMovie *peliculas=(sMovie*)malloc( sizeof(sMovie) * size );
+
     sMovie peliculas[LENGTH];
 
-    //initMovies(peliculas, size);
+    initMovies(peliculas, LENGTH);
 
     error = cargarDesdeArchivo( peliculas, LENGTH );
 
@@ -23,7 +22,7 @@ int main()
             break;
         case -2:
             initMovies( peliculas, LENGTH );
-            chargeWithFakeData( peliculas, LENGTH );
+            //chargeWithFakeData( peliculas, LENGTH );
             printf("\nNo existe el archivo de datos, se cre""\xA2"" exitosamente.\n\n");
             break;
     }
@@ -57,7 +56,7 @@ int main()
                 doExit( peliculas, LENGTH );
                 break;
             case 6:
-                imprimirListaPeliculas( peliculas, size );
+                imprimirListaPeliculas( peliculas, LENGTH );
                 break;
         }
 

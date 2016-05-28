@@ -40,6 +40,14 @@ void doExit( sMovie *peliculas, int largoArray );
 int solicitarIngresoPelicula( sMovie *peliculaAux, int intentos );
 int buscarLibre( sMovie *peliculas, int largoArray );
 int buscaIndexPeliculaPorTitulo( sMovie *peliculas, int largoArray, char *tituloABuscar );
+int solicitarModificarPelicula( sMovie *pelicula, int intentos );
+
+int cambiarTitulo( sMovie *pelicula, int intentos );
+int cambiarGenero( sMovie *pelicula, int intentos );
+int cambiarDuracion( sMovie *pelicula, int intentos );
+int cambiarPuntaje( sMovie *pelicula, int intentos );
+int cambiarDescripcion( sMovie *pelicula, int intentos );
+int cambiarURLImagen( sMovie *pelicula, int intentos );
 
 
 //Prototipos para TEST

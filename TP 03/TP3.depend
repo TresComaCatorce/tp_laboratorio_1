@@ -30,3 +30,34 @@
 1464376571 source:c:\users\cristian.ferrero\appdata\local\workspacec\tps\tp_laboratorio_1\tp 03\libtp3.c
 	"libTp3.h"
 
+1464382568 source:f:\workspaces\workspacec\tps\tp_laboratorio_1\bibliotecas\utilesv2\utilesv2.c
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+	<windows.h>
+	"UtilesV2.h"
+
+1464382568 f:\workspaces\workspacec\tps\tp_laboratorio_1\bibliotecas\utilesv2\utilesv2.h
+	<stdlib.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+
+1464405099 source:f:\workspaces\workspacec\tps\tp_laboratorio_1\tp 03\libtp3.c
+	"libTp3.h"
+
+1464403775 f:\workspaces\workspacec\tps\tp_laboratorio_1\tp 03\libtp3.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<conio.h>
+	<windows.h>
+	"estructuras.h"
+	"../Bibliotecas/UtilesV2/UtilesV2.h"
+
+1464382568 f:\workspaces\workspacec\tps\tp_laboratorio_1\tp 03\estructuras.h
+
+1464402704 source:f:\workspaces\workspacec\tps\tp_laboratorio_1\tp 03\main.c
+	"libTp3.h"
+

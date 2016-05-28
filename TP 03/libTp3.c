@@ -57,11 +57,6 @@ int cargarDesdeArchivo( sMovie *peliculas, int length )
             leyoArch = 1;
         }
 
-        if( pArchBin != NULL)
-        {
-            leyoArch = 1;
-        }
-
         if( leyoArch == 1 )
         {
             fread( peliculas , sizeof(sMovie) , length , pArchBin );
@@ -209,75 +204,38 @@ void borrarPelicula( sMovie *peliculas, int largoArray )
  */
 void modificarPelicula (sMovie *peliculas, int largoArray)
 {
-    /*char titulo[51];
-    int contadorErrores, i, opcion;
-
-    printf("Ingrese el titullo de la pelicula que desea moficar: ");
-    gets(titulo);
-
-    for( i=0 ; i<largoArray ; i++ )
+    if( peliculas != NULL && largoArray > 0 )
     {
-        if(peliculas[i].estado == 1 && strcmp(titulo, peliculas[i].titulo)==0)
+        char tituloAModificar[20];
+        int indexAModificar;
+        int error;
+
+        system(CLEAR_SCREEN);
+        error = getStringConIntentos( tituloAModificar, 20, "Ingrese el titulo de la pel""\xA1""cula que desea modificar: ", "Error! Titulo inv""\xA0""lido.", 3);
+
+        if( error == 0 )
         {
-            printf("Elija una opcion:\n1- Modificar titulo\n2- Modificar genero\n3- Modificar descripcion\n4- Modificar duracion\n5- Modificar puntaje\n6- Salir");
-            scanf("%d", &opcion);
+            indexAModificar = buscaIndexPeliculaPorTitulo( peliculas, largoArray, tituloAModificar);
 
-        while(opcion<1 || opcion>5)
+            if( indexAModificar >= 0 )
             {
-                printf("Error, reingrese opcion: \n");
-                scanf("%d", &opcion);
-                contadorErrores++;
-
-                if(contadorErrores>=3)
+                error = solicitarModificarPelicula( &peliculas[indexAModificar], 3);
+                if( error == 0 )
                 {
-                    printf("Demasidos intentos, el programa se cerrara.");
+                    system(CLEAR_SCREEN);
+                    printf("\nModificaci""\xA2""n realizada correctamente.\n\n");
+                    system("pause");
                 }
-                break;
             }
-
-            do
+            else if( indexAModificar == -2 )
             {
-                switch(opcion)
-                {
-                    case 1:
-                        printf("Ingrese titulo de la pelicula : ");
-                        fflush(stdin);
-                        gets(peliculas[i].titulo);
-                        break;
-                    case 2:
-                        printf("Ingrese genero de la pelicula: ");
-                        fflush(stdin);
-                        gets(peliculas[i].genero);
-                        break;
-                    case 3:
-                        printf("Ingrese la descripcion de la pelicula: ");
-                        fflush(stdin);
-                        gets(peliculas[i].descripcion);
-                        break;
-                    case 4:
-                        printf("Ingrese la duracion de la pelicula: ");
-                        fflush(stdin);
-                        scanf("%d", &peliculas[i].duracion);
-                        break;
-
-                    case 5:
-                        printf("Ingrese el puntaje de la pelicula: ");
-                        fflush(stdin);
-                        scanf("%d", &peliculas[i].puntaje);
-
-                    case 6:
-                        break;
-                }
-            }while(opcion!=6);
-
-            if(i==largoArray)
-            {
-                printf("No existe la pelicula buscada.\n");
+                system(CLEAR_SCREEN);
+                printf("\nNo existe una pel""\xA1""cula con ese titulo.");
                 system("pause");
-                system("cls");
             }
+
         }
-    }*/
+    }
 }
 
 
@@ -295,8 +253,8 @@ void generarPagina( sMovie *peliculas , int largoArray )
     if( peliculas != NULL )
     {
         char head[375] = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' content='IE=edge'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Lista peliculas</title><link href='css/bootstrap.min.css' rel='stylesheet'><link href='css/custom.css' rel='stylesheet'></head><body><div class='container'><div class='row'>";
-        char foot[225] = "</div></div><script src='js/jquery-1.11.3.min.js'></script><script src='js/bootstrap.min.js'></script><script src='js/ie10-viewport-bug-workaround.js'></script><script src='js/holder.min.js'></script></body></html>";
         char body[9390] = "";
+        char foot[225] = "</div></div><script src='js/jquery-1.11.3.min.js'></script><script src='js/bootstrap.min.js'></script><script src='js/ie10-viewport-bug-workaround.js'></script><script src='js/holder.min.js'></script></body></html>";
         char total[10000] = "";
 
         char fijo1[100] = "<article class='col-md-4 article-intro'><a href='#'><img class='img-responsive img-rounded' src='";
@@ -311,6 +269,7 @@ void generarPagina( sMovie *peliculas , int largoArray )
         FILE *pArchHTML;
 
 		pArchHTML = fopen( "WebPage/index.html", "w" );
+
 		if( pArchHTML != NULL )
 		{
             strcat( total , head );
@@ -528,6 +487,289 @@ int buscaIndexPeliculaPorTitulo( sMovie *peliculas, int largoArray, char *titulo
 
     }
     return retorno;
+}
+
+
+
+/** \brief Funcion de uso interno que solicita la modificacion al usuario, mostrandole un menú con cada atributo de las peliculas.
+ *
+ * \param pelicula (*sMovie) Puntero que apunta a la pelicula que se va a modificar.
+ * \param intentos (int) Cantidad de intentos que se le solicita el ingreso al usuario en caso de fallar.
+ * \return (int) [0]=Modificacion exitosa/[-1]=Error de argumentos/[-2]=Error al modificar la pelicula.
+ *
+ */
+int solicitarModificarPelicula( sMovie *pelicula, int intentos )
+{
+    int retorno = -1;
+
+    if( pelicula != NULL && intentos > 0 )
+    {
+        int opcion;
+        int error;
+
+        system(CLEAR_SCREEN);
+
+        opcion = buildMenu( "Seleccione el atributo que desea modificar:\n"
+                            "1)Titulo\n"
+                            "2)Genero\n"
+                            "3)Duraci""\xA2""n\n"
+                            "4)Puntaje\n"
+                            "5)Descripci""\xA2""n\n"
+                            "6)URL de la imagen\n"
+                            "7)Volver al men""\xA3"" principal\n", 1, 7, 3, "Error! Opci""\xA2""n inv""\xA0""lida" );
+
+        switch(opcion)
+        {
+            case 1:
+                error = cambiarTitulo( pelicula , intentos );
+                break;
+            case 2:
+                error = cambiarGenero( pelicula , intentos );
+                break;
+            case 3:
+                error = cambiarDuracion( pelicula , intentos );
+                break;
+            case 4:
+                error = cambiarPuntaje( pelicula , intentos );
+                break;
+            case 5:
+                error = cambiarDescripcion( pelicula , intentos );
+                break;
+            case 6:
+                error = cambiarURLImagen( pelicula , intentos );
+                break;
+            case 7:
+                break;
+        }
+
+        if( error == 0 )
+        {
+            retorno = 0;
+        }
+        else
+        {
+            retorno = -2;
+        }
+
+
+    }
+
+    return retorno;
+
+}
+
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
+int cambiarTitulo( sMovie *pelicula, int intentos )
+{
+    int retorno = -1;
+
+    if( pelicula != NULL && intentos > 0 )
+    {
+        int error;
+        char tituloAux[20];
+        system(CLEAR_SCREEN);
+
+        error = getStringConIntentos( tituloAux, 20, "Ingrese el nuevo titulo de la pelicula:", "Error! Titulo inv""\xA0""lido.", intentos );
+
+        if( error == 0 )
+        {
+            strcpy( pelicula->titulo, tituloAux );
+            retorno = 0;
+        }
+        else if( error == -1 )
+        {
+            retorno = -2;
+        }
+    }
+
+    return retorno;
+
+}
+
+
+
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
+int cambiarGenero( sMovie *pelicula, int intentos )
+{
+    int retorno = -1;
+
+    if( pelicula != NULL && intentos > 0 )
+    {
+        int error;
+        char generoAux[20];
+        system(CLEAR_SCREEN);
+
+        error = getStringConIntentos( generoAux, 20, "Ingrese el nuevo genero de la pelicula:", "Error! Genero inv""\xA0""lido.", intentos );
+
+        if( error == 0 )
+        {
+            strcpy( pelicula->genero, generoAux );
+            retorno = 0;
+        }
+        else if( error == -1 )
+        {
+            retorno = -2;
+        }
+    }
+
+    return retorno;
+
+}
+
+
+
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
+int cambiarDuracion( sMovie *pelicula, int intentos )
+{
+    int retorno = -1;
+
+    if( pelicula != NULL && intentos > 0 )
+    {
+        int error;
+        int duracionAux;
+        system(CLEAR_SCREEN);
+
+        error = getInt( &duracionAux, "Ingrese la nueva duraci""\xA2""n de la pelicula: ", 1, 1, 0, 10, "Error! Duraci""\xA2""n incorrecta.", intentos);
+
+        if( error == 0 )
+        {
+            pelicula->duracion = duracionAux ;
+            retorno = 0;
+        }
+        else if( error == -1 )
+        {
+            retorno = -2;
+        }
+    }
+
+    return retorno;
+
+}
+
+
+
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
+int cambiarPuntaje( sMovie *pelicula, int intentos )
+{
+    int retorno = -1;
+
+    if( pelicula != NULL && intentos > 0 )
+    {
+        int error;
+        int puntajeAux;
+        system(CLEAR_SCREEN);
+
+        error = getInt( &puntajeAux, "Ingrese el nuevo puntaje de la pelicula: ", 1, 1, 0, 10, "Error! Puntaje incorrecto.", intentos);
+
+        if( error == 0 )
+        {
+            pelicula->puntaje = puntajeAux ;
+            retorno = 0;
+        }
+        else if( error == -1 )
+        {
+            retorno = -2;
+        }
+    }
+
+    return retorno;
+
+}
+
+
+
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
+int cambiarDescripcion( sMovie *pelicula, int intentos )
+{
+    int retorno = -1;
+
+    if( pelicula != NULL && intentos > 0 )
+    {
+        int error;
+        char descripcionAux[50];
+        system(CLEAR_SCREEN);
+
+        error = getStringConIntentos( descripcionAux, 50, "Ingrese la nueva descripci""\xA2""n de la pelicula:", "Error! Descripci""\xA2""n inv""\xA0""lida.", intentos );
+
+        if( error == 0 )
+        {
+            strcpy( pelicula->descripcion, descripcionAux );
+            retorno = 0;
+        }
+        else if( error == -1 )
+        {
+            retorno = -2;
+        }
+    }
+
+    return retorno;
+
+}
+
+
+
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
+int cambiarURLImagen( sMovie *pelicula, int intentos )
+{
+    int retorno = -1;
+
+    if( pelicula != NULL && intentos > 0 )
+    {
+        int error;
+        char URLAux[150];
+        system(CLEAR_SCREEN);
+
+        error = getStringConIntentos( URLAux, 150, "Ingrese la nueva URL de la imagen de la pelicula:", "Error! URL inv""\xA0""lida.", intentos );
+
+        if( error == 0 )
+        {
+            strcpy( pelicula->linkImagen, URLAux );
+            retorno = 0;
+        }
+        else if( error == -1 )
+        {
+            retorno = -2;
+        }
+    }
+
+    return retorno;
+
 }
 
 
